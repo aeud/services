@@ -1,0 +1,20 @@
+[Unit]
+Description=gunicorn store daemon
+After=network.target
+
+[Service]
+User=user1
+Group=user1
+Environment=DATABASE_NAME=dbname
+Environment=DATABASE_USER=username
+Environment=DATABASE_PASSWORD=password
+Environment=DATABASE_HOST=localhost
+Environment=DATABASE_PORT=5432
+Environment=STATIC_ROOT=assets
+WorkingDirectory=/path/to/django
+ExecStart=/bin/bash /path/to/deploy_store.sh
+PIDFile=/var/run/store/store.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
